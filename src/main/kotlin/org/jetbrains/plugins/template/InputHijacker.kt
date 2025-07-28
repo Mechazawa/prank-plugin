@@ -1,10 +1,9 @@
 package org.jetbrains.plugins.template
 
 import com.intellij.openapi.actionSystem.DataContext
-import com.intellij.openapi.editor.Caret
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.editor.actionSystem.EditorActionHandler
-import com.intellij.openapi.editor.actionSystem.EditorActionManager
 import com.intellij.openapi.editor.actionSystem.TypedAction
 import com.intellij.openapi.editor.actionSystem.TypedActionHandler
 import com.intellij.openapi.project.Project
@@ -43,12 +42,14 @@ class InputHijacker : ProjectActivity {
                     val charToInsert = loremIpsumText[currentIndex % loremIpsumText.length]
                     currentIndex++
                     
-                    val document = editor.document
-                    val caretModel = editor.caretModel
-                    val offset = caretModel.offset
-                    
-                    document.insertString(offset, charToInsert.toString())
-                    caretModel.moveToOffset(offset + 1)
+                    WriteCommandAction.runWriteCommandAction(editor.project) {
+                        val document = editor.document
+                        val caretModel = editor.caretModel
+                        val offset = caretModel.offset
+                        
+                        document.insertString(offset, charToInsert.toString())
+                        caretModel.moveToOffset(offset + 1)
+                    }
                 } else {
                     originalHandler?.execute(editor, charTyped, dataContext)
                 }
