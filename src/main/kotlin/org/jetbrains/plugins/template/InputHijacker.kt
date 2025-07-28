@@ -8,27 +8,35 @@ import com.intellij.openapi.editor.actionSystem.TypedAction
 import com.intellij.openapi.editor.actionSystem.TypedActionHandler
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
+import org.jetbrains.plugins.template.settings.PrankPluginSettings
 import java.io.InputStreamReader
 
 class InputHijacker : ProjectActivity {
     
     private var originalHandler: TypedActionHandler? = null
-    private var loremIpsumText: String = ""
     private var currentIndex = 0
     
     override suspend fun execute(project: Project) {
-        loadLoremIpsum()
         hijackTypedAction()
     }
     
-    private fun loadLoremIpsum() {
-        try {
-            val inputStream = javaClass.classLoader.getResourceAsStream("lorem-ipsum.txt")
+    private fun getSelectedText(): String {
+        val settings = PrankPluginSettings.getInstance()
+        val fileName = when (settings.selectedTextVariant) {
+            PrankPluginSettings.TextVariant.LOREM_IPSUM -> "lorem-ipsum.txt"
+            PrankPluginSettings.TextVariant.STEAMED_HAMS -> "steamed-hams.txt"
+            PrankPluginSettings.TextVariant.BEE_MOVIE -> "bee-movie.txt"
+        }
+        
+        return try {
+            val inputStream = javaClass.classLoader.getResourceAsStream(fileName)
             if (inputStream != null) {
-                loremIpsumText = InputStreamReader(inputStream).readText().replace("\n", " ").replace("\r", "")
+                InputStreamReader(inputStream).readText().replace("\n", " ").replace("\r", "")
+            } else {
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             }
         } catch (e: Exception) {
-            loremIpsumText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         }
     }
     
@@ -38,8 +46,9 @@ class InputHijacker : ProjectActivity {
         
         typedAction.setupRawHandler(object : TypedActionHandler {
             override fun execute(editor: Editor, charTyped: Char, dataContext: DataContext) {
-                if (loremIpsumText.isNotEmpty()) {
-                    val charToInsert = loremIpsumText[currentIndex % loremIpsumText.length]
+                val selectedText = getSelectedText()
+                if (selectedText.isNotEmpty()) {
+                    val charToInsert = selectedText[currentIndex % selectedText.length]
                     currentIndex++
                     
                     WriteCommandAction.runWriteCommandAction(editor.project) {
