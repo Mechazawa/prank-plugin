@@ -7,8 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is an IntelliJ IDEA plugin project that implements a prank functionality - it hijacks user typing and replaces all input with Lorem Ipsum text. Built from the official JetBrains IntelliJ Platform Plugin Template.
 
 **Plugin Details:**
-- Plugin ID: `org.jetbrains.plugins.prank`
-- Plugin Name: "Lorem Ipsum Prank Plugin"
+- Plugin ID: `nl.scrumble.plugin.prank`
+- Plugin Name: "Scrumble Prank"
 - Target Platform: IntelliJ Community 2024.3.6
 - Minimum Build: 243 (2024.3)
 - Language: Kotlin with Java 21 JVM toolchain
@@ -34,8 +34,8 @@ This is an IntelliJ IDEA plugin project that implements a prank functionality - 
 ```
 
 ### Plugin Installation
-The installable JAR is generated at: `build/libs/IntelliJ Platform Plugin Template-2.2.0.jar`
-(Note: Due to build configuration, the main JAR keeps the template name despite plugin being renamed)
+The installable JAR is generated at: `build/libs/Scrumble Prank-2.2.0.jar`
+(Note: The main JAR may need to be manually copied from the template-named version)
 
 ## Architecture Overview
 
@@ -72,15 +72,20 @@ IntelliJ requires specific threading patterns for document modifications:
 
 ### Important Gradle Properties
 ```properties
-pluginGroup = org.jetbrains.plugins.prank
-pluginName = Lorem Ipsum Prank Plugin
+pluginGroup = nl.scrumble.plugin.prank
+pluginName = Scrumble Prank
 pluginVersion = 2.2.0
 platformType = IC (IntelliJ Community)
 platformVersion = 2024.3.6
 ```
 
-### JAR Naming Issue
-The build configuration has a quirk where the main JAR file retains the template name despite plugin renaming. The actual plugin name appears correctly in the IDE but the JAR filename needs manual adjustment for distribution.
+### Configuration Options
+The plugin now includes configurable text variants:
+- **Lorem Ipsum**: Classic Lorem ipsum text
+- **Steamed Hams**: Steamed Hams script text  
+- **Bee Movie**: Bee Movie script text
+
+Users can configure their preferred text variant via File → Settings → Tools → Scrumble Prank.
 
 ## Testing Framework
 
@@ -115,8 +120,8 @@ WriteCommandAction.runWriteCommandAction(editor.project) {
 ## Deployment Notes
 
 The plugin generates three JAR variants:
-- `IntelliJ Platform Plugin Template-2.2.0.jar` - Main installable plugin
+- `Scrumble Prank-2.2.0.jar` - Main installable plugin  
 - `IntelliJ Platform Plugin Template-2.2.0-instrumented.jar` - Debug version
-- `Lorem Ipsum Prank Plugin-2.2.0-base.jar` - Base version (correct naming)
+- `Scrumble Prank-2.2.0-base.jar` - Base version
 
 For installation in IntelliJ IDEA, use the main JAR file via "Install Plugin from Disk" option.

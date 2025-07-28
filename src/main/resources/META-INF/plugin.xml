@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>nl.scrumble.plugins.prank</id>
-    <name>Prank Plugin</name>
+    <id>nl.scrumble.plugin.prank</id>
+    <name>Scrumble Prank</name>
     <vendor>Bas</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -14,7 +14,7 @@
         <postStartupActivity implementation="org.jetbrains.plugins.template.InputHijacker" />
         <applicationConfigurable parentId="tools" instance="org.jetbrains.plugins.template.settings.PrankPluginConfigurable" 
                                  id="org.jetbrains.plugins.template.settings.PrankPluginConfigurable" 
-                                 displayName="Prank Plugin"/>
+                                 displayName="Scrumble Prank"/>
         <applicationService serviceImplementation="org.jetbrains.plugins.template.settings.PrankPluginSettings"/>
     </extensions>
 </idea-plugin>

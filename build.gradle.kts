@@ -16,7 +16,7 @@ version = providers.gradleProperty("pluginVersion").get()
 
 // Set the archive base name to match the plugin name
 tasks.withType<Jar> {
-    archiveBaseName.set("Lorem Ipsum Prank Plugin")
+    archiveBaseName.set("Scrumble Prank")
 }
 
 // Set the JVM language level used to build the project.
