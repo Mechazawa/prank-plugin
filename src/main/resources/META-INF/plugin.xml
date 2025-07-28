@@ -1,8 +1,8 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>org.jetbrains.plugins.template</id>
-    <name>IntelliJ Platform Plugin Template</name>
-    <vendor>JetBrains</vendor>
+    <id>org.jetbrains.plugins.prank</id>
+    <name>Prank Input Plugin</name>
+    <vendor>Prank Plugin Developer</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
@@ -11,5 +11,6 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="org.jetbrains.plugins.template.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <postStartupActivity implementation="org.jetbrains.plugins.template.startup.MyProjectActivity" />
+        <postStartupActivity implementation="org.jetbrains.plugins.template.InputHijacker" />
     </extensions>
 </idea-plugin>

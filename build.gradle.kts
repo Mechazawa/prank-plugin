@@ -14,6 +14,11 @@ plugins {
 group = providers.gradleProperty("pluginGroup").get()
 version = providers.gradleProperty("pluginVersion").get()
 
+// Set the archive base name to match the plugin name
+tasks.withType<Jar> {
+    archiveBaseName.set("Lorem Ipsum Prank Plugin")
+}
+
 // Set the JVM language level used to build the project.
 kotlin {
     jvmToolchain(21)
