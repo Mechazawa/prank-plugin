@@ -17,7 +17,14 @@ class PrankPluginSettings : PersistentStateComponent<PrankPluginSettings> {
         BEE_MOVIE("Bee Movie")
     }
     
+    enum class PrankMode(val displayName: String) {
+        REWRITE("Rewrite (Current)"),
+        BUTTER_FINGERS("Butter Fingers")
+    }
+    
     var selectedTextVariant: TextVariant = TextVariant.LOREM_IPSUM
+    var prankMode: PrankMode = PrankMode.REWRITE
+    var butterFingersPercentage: Int = 10
     
     override fun getState(): PrankPluginSettings = this
     
