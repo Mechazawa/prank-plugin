@@ -1,7 +1,8 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>nl.scrumble.plugin.prank</id>
-    <name>Scrumble Prank</name>
+<!--    <name>Scrumble Prank</name>-->
+    <name>IDEA Language Services</name>
     <vendor>Bas</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -9,11 +10,9 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="org.jetbrains.plugins.template.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="org.jetbrains.plugins.template.startup.MyProjectActivity" />
-        <postStartupActivity implementation="org.jetbrains.plugins.template.InputHijacker" />
-        <applicationConfigurable parentId="tools" instance="org.jetbrains.plugins.template.settings.PrankPluginConfigurable" 
-                                 id="org.jetbrains.plugins.template.settings.PrankPluginConfigurable" 
+        <postStartupActivity implementation="org.jetbrains.plugins.template.startup.InputHijacker" />
+        <applicationConfigurable parentId="tools" instance="org.jetbrains.plugins.template.settings.PrankPluginConfigurable"
+                                 id="org.jetbrains.plugins.template.settings.PrankPluginConfigurable"
                                  displayName="Scrumble Prank"/>
         <applicationService serviceImplementation="org.jetbrains.plugins.template.settings.PrankPluginSettings"/>
     </extensions>
