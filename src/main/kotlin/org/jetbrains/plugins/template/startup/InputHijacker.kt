@@ -47,7 +47,10 @@ class InputHijacker : ProjectActivity {
 
     private fun hijackTypedAction() {
         val typedAction = TypedAction.getInstance()
-        originalHandler = typedAction.rawHandler
+
+        if (originalHandler == null) {
+            originalHandler = typedAction.rawHandler
+        }
 
         typedAction.setupRawHandler { editor, charTyped, dataContext ->
             val selectedText = getSelectedText()
