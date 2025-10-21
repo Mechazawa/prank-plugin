@@ -23,7 +23,7 @@ class PrankPluginSettings : PersistentStateComponent<PrankPluginSettings> {
     }
     
     var selectedTextVariant: TextVariant = TextVariant.LOREM_IPSUM
-    var prankMode: PrankMode = PrankMode.REWRITE
+    var prankMode: PrankMode = PrankMode.BUTTER_FINGERS
     var butterFingersPercentage: Int = 10
     
     override fun getState(): PrankPluginSettings = this
